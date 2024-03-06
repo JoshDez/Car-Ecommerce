@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
         * {
@@ -127,6 +128,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <img src="logo.png" alt="Logo" class="logo">
@@ -141,22 +143,25 @@
     <div class="main">
         <h2>Featured Products</h2>
         <div class="product">
-            <img src="https://www.hdcarwallpapers.com/walls/toyota_gr_yaris_rz_high_performance_2020_4k-HD.jpg" alt="Product 1">
+            <img src="https://www.hdcarwallpapers.com/walls/toyota_gr_yaris_rz_high_performance_2020_4k-HD.jpg"
+                alt="Product 1">
             <h3>Toyota GR Yaris</h3>
-            <p>The GR Yaris was designed to catch your attention. Its careful engineering makes it a true head-turner from the tip of its 3-tier LED head lamps to the top of its high-tech carbon fiber roof, to the end of it's redesigned rear spoiler</p>
-            <center><button class="add-to-cart" data-product="Toyota GR Yaris">Add to Cart</button></center>
+            <p>The GR Yaris was designed to catch your attention. Its careful engineering makes it a true head-turner
+                from the tip of its 3-tier LED head lamps to the top of its high-tech carbon fiber roof, to the end of
+                it's redesigned rear spoiler</p>
+            <center><button class="add-to-cart" data-product="Toyota GR Yaris/45000/1">Add</button></center>
         </div>
         <div class="product">
             <img src="product2.jpg" alt="Product 2">
             <h3>Honda Civic Type R</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <center><button class="add-to-cart" data-product="Honda Civic Type R">Add to Cart</button></center>
+            <center><button class="add-to-cart" data-product="Honda Civic Type R/50000/1">Add</button></center>
         </div>
         <div class="product">
             <img src="product3.jpg" alt="Product 3">
             <h3>Product 3</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <center><button class="add-to-cart" data-product="Product 3">Add to Cart</button></center>
+            <center><button class="add-to-cart" data-product="Product 3/12000/1">Add</button></center>
         </div>
     </div>
     <div class="sidebar">
@@ -168,7 +173,9 @@
             <li><a href="#">Honda</a></li>
         </ul>
         <h2>Cart:</h2>
-        <ul id="productContent"></ul>
+        <table id="productCart"></table>
+        <h2 id="total"></h2>
+        <button onclick="clearCart()">Clear All</button>
     </div>
     <div class="footer">
         <p>&copy; 2024 My E-commerce Website. All rights reserved.</p>
@@ -176,24 +183,101 @@
 </body>
 
 <script>
+    var cars = [];
+    var totalPrice = 0;
     const addToCartBtns = document.querySelectorAll('.add-to-cart');
 
     // Get the cart element
-    const cart = document.getElementById('productContent');
+    const cart = document.getElementById('productCart');
+    const total = document.getElementById('total');
 
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const productName = btn.getAttribute('data-product');
-            
-            // Create a list item element
-            const listItem = document.createElement('li');
-            
-            listItem.textContent = productName;
-            
-            cart.appendChild(listItem);
+            const item = btn.getAttribute('data-product');
+            addToCart(item);
         });
     });
+
+    function addToCart(product) {
+        let temp = product.split('/');
+        let productName = temp[0];
+        let productPrice = Number(temp[1]);
+        let productQuantity = Number(temp[2]);
+
+        // Check if the product already exists in the cars array
+        let existingProductIndex = cars.findIndex(item => {
+            let car = item.split('/');
+            return car[0] === productName;
+        });
+
+        if (existingProductIndex !== -1) {
+            // Product already exists, update quantity
+            let car = cars[existingProductIndex].split('/');
+            let carQuantity = Number(car[2]);
+            carQuantity++;
+            cars[existingProductIndex] = productName + "/" + productPrice + "/" + carQuantity;
+        } else {
+            // Product doesn't exist, add it to the cars array
+            cars.push(product);
+        }
+
+        // Update total price
+        totalPrice += productPrice;
+
+        // Update cart
+        updateCart();
+        // Update total price display
+        total.innerText = "Total Price: $" + totalPrice;
+    }
+
+    function updateCart() {
+        removeAllTableContents();
+        for (let i = 0; i < cars.length; i++) {
+
+            let car = cars[i].split('/');
+
+            let col1 = document.createElement('td');
+            let col2 = document.createElement('td');
+            let col3 = document.createElement('td');
+
+            //product name
+            col1.textContent = car[0];
+            //product price
+            col2.textContent = car[1];
+            //product quantity
+            col3.textContent = car[2];
+
+            let tableRow = document.createElement('tr');
+            tableRow.appendChild(col1);
+            tableRow.appendChild(col2);
+            tableRow.appendChild(col3);
+
+            cart.appendChild(tableRow);
+
+        }
+    }
+
+    function clearCart() {
+    const table = document.getElementById('productCart');
+    
+    // Remove all rows from the table
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+
+    // Reset the total price to zero
+    totalPrice = 0;
+    total.innerText = "Total Price: $" + totalPrice;
+
+    // Clear the cars array
+    cars = [];
+}
+
+    function removeAllTableContents() {
+        const table = document.getElementById('productCart'); // Replace 'your-table-id' with the actual id of your table
+        table.innerHTML = "";
+    }
+
 </script>
 
 </html>
-
