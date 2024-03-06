@@ -1,0 +1,153 @@
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #023047;
+           
+            padding: 20px;
+            color: #ffb703;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 200px;
+            height: 100px;
+        }
+
+        .nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #219ebc;
+        }
+
+        .nav li {
+            float: left;
+        }
+
+        .nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav li a:hover {
+            background-color: #fb8500;
+        }
+
+        .main {
+            width: 70%;
+            float: left;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 30%;
+            float: left;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: white;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product h3 {
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .product p {
+            margin: 0;
+            padding: 10px 0;
+        }
+
+        .product button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #111;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            clear: both;
+        }
+
+        /* Add this code to create a second navigation in the side */
+        .side-nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .side-nav li {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .side-nav li a {
+            display: block;
+            color: #333;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .side-nav li a:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>My E-commerce Website</h1>
+    </div>
+    <ul class="nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    
+</body>
+
+<script>
+    const product1 = document.getElementById('product1');
+    product1.addEventListener('click', () => {
+    const productContent = document.getElementById('productContent');
+    productContent.textContent = 'Toyota GR Yaris';
+});
+
+</script>
+
+</html>
