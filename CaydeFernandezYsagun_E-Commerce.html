@@ -20,6 +20,13 @@
             text-align: center;
         }
 
+        table {
+            border: 1px solid black;
+        }
+        td {
+            border: 1px solid black;
+        }
+
         .logo {
             width: 200px;
             height: 100px;
@@ -232,6 +239,21 @@
 
     function updateCart() {
         removeAllTableContents();
+
+        let col1 = document.createElement('td');
+        let col2 = document.createElement('td');
+        let col3 = document.createElement('td');
+
+        col1.innerText = "Name";
+        col2.innerText = "Price";
+        col3.innerText = "Quantity";
+
+        let tableRow = document.createElement('tr');
+        tableRow.appendChild(col1);
+        tableRow.appendChild(col2);
+        tableRow.appendChild(col3);
+        cart.appendChild(tableRow);
+
         for (let i = 0; i < cars.length; i++) {
 
             let car = cars[i].split('/');
@@ -258,20 +280,20 @@
     }
 
     function clearCart() {
-    const table = document.getElementById('productCart');
-    
-    // Remove all rows from the table
-    while (table.firstChild) {
-        table.removeChild(table.firstChild);
+        const table = document.getElementById('productCart');
+
+        // Remove all rows from the table
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+
+        // Reset the total price to zero
+        totalPrice = 0;
+        total.innerText = "Total Price: $" + totalPrice;
+
+        // Clear the cars array
+        cars = [];
     }
-
-    // Reset the total price to zero
-    totalPrice = 0;
-    total.innerText = "Total Price: $" + totalPrice;
-
-    // Clear the cars array
-    cars = [];
-}
 
     function removeAllTableContents() {
         const table = document.getElementById('productCart'); // Replace 'your-table-id' with the actual id of your table
