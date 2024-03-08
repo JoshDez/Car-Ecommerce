@@ -142,10 +142,10 @@
         <h1>My E-commerce Website</h1>
     </div>
     <ul class="nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="CaydeFernandezYsagun_E-Commerce.html">Home</a></li>
+        <li><a href="CaydeFernandezYsagun_E-Commerce.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="main">
         <h2>Featured Products</h2>
@@ -156,29 +156,29 @@
             <p>The GR Yaris was designed to catch your attention. Its careful engineering makes it a true head-turner
                 from the tip of its 3-tier LED head lamps to the top of its high-tech carbon fiber roof, to the end of
                 it's redesigned rear spoiler</p>
-            <center><button class="add-to-cart" data-product="Toyota GR Yaris/45000/1">Add</button></center>
+            <center>
+                <input id="quantity1" type="number">
+                <button class="add-to-cart" data-product="Toyota GR Yaris/45000/1/quantity1">Add</button>
+            </center>
         </div>
         <div class="product">
             <img src="product2.jpg" alt="Product 2">
             <h3>Honda Civic Type R</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <center><button class="add-to-cart" data-product="Honda Civic Type R/50000/1">Add</button></center>
+            <center>
+                <input id="quantity2" type="number">
+                <button class="add-to-cart" data-product="Honda Civic Type R/50000/1/quantity2">Add</button></center>
         </div>
         <div class="product">
             <img src="product3.jpg" alt="Product 3">
             <h3>Product 3</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <center><button class="add-to-cart" data-product="Product 3/12000/1">Add</button></center>
+            <center>
+                <input id="quantity3" type="number">
+                <button class="add-to-cart" data-product="Product 3/12000/1/quantity3">Add</button></center>
         </div>
     </div>
     <div class="sidebar">
-        <h2>Categories</h2>
-        <ul class="side-nav">
-            <li><a href="#">Toyota</a></li>
-            <li><a href="#">Mitsubishi</a></li>
-            <li><a href="#">Nissan</a></li>
-            <li><a href="#">Honda</a></li>
-        </ul>
         <h2>Cart:</h2>
         <table id="productCart"></table>
         <h2 id="total"></h2>
@@ -203,11 +203,21 @@
     addToCartBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const item = btn.getAttribute('data-product');
-            addToCart(item);
+            const prod = item.split('/');
+            const quantity = document.getElementById(prod[3]);
+
+            if (quantity.value != '') {
+                const val = prod[0] + "/" + prod[1] + "/" + quantity.value;
+                addToCart(val, Number(quantity.value));
+            } else {
+                const val = prod[0] + "/" + prod[1] + "/" + prod[2];
+                addToCart(item, 0);
+            }
+
         });
     });
 
-    function addToCart(product) {
+    function addToCart(product, qty) {
         let temp = product.split('/');
         let productName = temp[0];
         let productPrice = Number(temp[1]);
@@ -223,7 +233,11 @@
             // Product already exists, update quantity
             let car = cars[existingProductIndex].split('/');
             let carQuantity = Number(car[2]);
-            carQuantity++;
+            if(qty > 0) {
+                carQuantity += qty;
+            } else {
+                carQuantity++;
+            }
             cars[existingProductIndex] = productName + "/" + productPrice + "/" + carQuantity;
         } else {
             // Product doesn't exist, add it to the cars array
@@ -238,6 +252,8 @@
         // Update total price display
         total.innerText = "Total Price: $" + totalPrice;
     }
+
+
 
     //checkout
     function checkout() {
