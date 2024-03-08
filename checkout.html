@@ -89,7 +89,7 @@
         <h1>My E-commerce Website</h1>
     </div>
     <ul class="nav">
-        <li><a href="#">Home</a></li>
+        <li><a href="CaydeFernandezYsagun_E-Commerce.html">Home</a></li>
         <li><a href="#">Products</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -110,26 +110,35 @@
         // Get the cart data from the URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const cartData = urlParams.get('cart');
-
+    
         // Parse the cart data back into an array
         const cart = JSON.parse(decodeURIComponent(cartData));
-
-        // Function to display cart details in the container
+    
+        // Function to display cart details and calculate total price
         function displayCartDetails() {
             const cartContainer = document.getElementById('cartDetails');
+            let totalPrice = 0;
+    
             cartContainer.innerHTML = ''; // Clear previous content
-
+    
             cart.forEach(item => {
                 const [productName, productPrice, productQuantity] = item.split('/');
                 const productDetails = document.createElement('div');
-                productDetails.innerHTML = `<p>Name: ${productName}</p><p>Price: $${productPrice}</p><p>Quantity: ${productQuantity}</p><hr>`;
+                const subtotal = parseInt(productPrice) * parseInt(productQuantity);
+                totalPrice += subtotal;
+                productDetails.innerHTML = `<p>Name: ${productName}</p><p>Price: $${productPrice}</p><p>Quantity: ${productQuantity}</p><p>Subtotal: $${subtotal}</p><hr>`;
                 cartContainer.appendChild(productDetails);
             });
+    
+            // Display total price after displaying all items
+            const totalPriceElement = document.createElement('p');
+            totalPriceElement.textContent = `Total Price: $${totalPrice}`;
+            cartContainer.appendChild(totalPriceElement);
         }
-
-        // Display cart details when the page loads
+    
+        // Display cart details and total price when the page loads
         displayCartDetails();
-
+    
         // Function to handle the buy button click
         document.getElementById('buyButton').addEventListener('click', () => {
             // You can implement the logic to handle the purchase here
