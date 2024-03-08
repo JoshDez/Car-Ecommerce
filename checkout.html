@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -12,7 +13,6 @@
 
         .header {
             background-color: #023047;
-           
             padding: 20px;
             color: #ffb703;
             font-size: 12px;
@@ -54,47 +54,6 @@
             padding: 20px;
         }
 
-        .sidebar {
-            width: 30%;
-            float: left;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-
-        .product {
-            background-color: white;
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .product img {
-            width: 100%;
-            height: auto;
-        }
-
-        .product h3 {
-            margin: 0;
-            padding: 10px 0;
-        }
-
-        .product p {
-            margin: 0;
-            padding: 10px 0;
-        }
-
-        .product button {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .product button:hover {
-            background-color: #111;
-        }
-
         .footer {
             background-color: #333;
             color: white;
@@ -103,27 +62,23 @@
             clear: both;
         }
 
-        /* Add this code to create a second navigation in the side */
-        .side-nav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+        #cartDetails {
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
         }
 
-        .side-nav li {
-            border-bottom: 1px solid #ccc;
+        #buyButton {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .side-nav li a {
-            display: block;
-            color: #333;
-            padding: 10px;
-            text-decoration: none;
-        }
-
-        .side-nav li a:hover {
-            background-color: #eee;
+        #buyButton:hover {
+            background-color: #111;
         }
     </style>
 </head>
@@ -138,16 +93,44 @@
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
-    
+    <div class="main">
+        <h2>Cart Details</h2>
+        <div id="cartDetails"></div>
+        <button id="buyButton">Buy</button>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 My E-commerce Website. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Get the cart data from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const cartData = urlParams.get('cart');
+
+        // Parse the cart data back into an array
+        const cart = JSON.parse(decodeURIComponent(cartData));
+
+        // Function to display cart details in the container
+        function displayCartDetails() {
+            const cartContainer = document.getElementById('cartDetails');
+            cartContainer.innerHTML = ''; // Clear previous content
+
+            cart.forEach(item => {
+                const [productName, productPrice, productQuantity] = item.split('/');
+                const productDetails = document.createElement('div');
+                productDetails.innerHTML = `<p>Name: ${productName}</p><p>Price: $${productPrice}</p><p>Quantity: ${productQuantity}</p><hr>`;
+                cartContainer.appendChild(productDetails);
+            });
+        }
+
+        // Display cart details when the page loads
+        displayCartDetails();
+
+        // Function to handle the buy button click
+        document.getElementById('buyButton').addEventListener('click', () => {
+            // You can implement the logic to handle the purchase here
+            alert('Thank you for your purchase!');
+        });
+    </script>
 </body>
-
-<script>
-    const product1 = document.getElementById('product1');
-    product1.addEventListener('click', () => {
-    const productContent = document.getElementById('productContent');
-    productContent.textContent = 'Toyota GR Yaris';
-});
-
-</script>
-
 </html>

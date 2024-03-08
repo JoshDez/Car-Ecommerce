@@ -183,6 +183,8 @@
         <table id="productCart"></table>
         <h2 id="total"></h2>
         <button onclick="clearCart()">Clear All</button>
+        <button type="button" onclick="checkout()">Checkout</button>
+
     </div>
     <div class="footer">
         <p>&copy; 2024 My E-commerce Website. All rights reserved.</p>
@@ -236,6 +238,23 @@
         // Update total price display
         total.innerText = "Total Price: $" + totalPrice;
     }
+
+    //checkout
+    function checkout() {
+    // Encode cart data as JSON and URI encode it
+    const cartData = encodeURIComponent(JSON.stringify(cars));
+
+    // Create the URL with the cart data as a parameter
+    const checkoutURL = 'checkout.html?cart=' + cartData;
+
+    // Redirect to the checkout page
+    window.location.href = checkoutURL;
+}
+
+
+
+
+
 
     function updateCart() {
         removeAllTableContents();
