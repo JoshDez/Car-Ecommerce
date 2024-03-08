@@ -1,80 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - SJJ E-Commerce Store</title>
     <style>
         * {
             box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .header {
+            background-color: #023047;
             padding: 20px;
-        }
-
-        h2 {
+            color: #ffb703;
+            font-size: 12px;
             text-align: center;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+        .logo {
+            width: 200px;
+            height: 100px;
         }
 
-        label {
-            font-weight: bold;
+        .nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #219ebc;
         }
 
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
+        .nav li {
+            float: left;
+        }
+
+        .nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav li a:hover {
+            background-color: #fb8500;
+        }
+
+        .main {
+            width: 70%;
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #023047;
+            color: #fb8500;
+            padding: 20px;
+            text-align: center;
+            clear: both;
+        }
+
+        #cartDetails {
+            padding: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
 
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
+        #buyButton {
+            background-color: #333;
+            color: white;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+        #buyButton:hover {
+            background-color: #111;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h2>Contact Us</h2>
-        <p>Swing by for a cup of coffee, or leave us a message:</p>
-        <form action="/submit_contact_form.php" method="post">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your first name.." required>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>My E-commerce Website</h1>
+    </div>
+    <ul class="nav">
+        <li><a href="CaydeFernandezYsagun_E-Commerce.html">Home</a></li>
+        <li><a href="CaydeFernandezYsagun_E-Commerce.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <center>
+        <div class="container" style="height: 500px;">
+            <h2>Contact Us</h2>
+            <p>Swing by for a cup of coffee, or leave us a message:</p>
+            <form action="/submit_contact_form.php" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="fname">First Name</label>
+                        </td>
+                        <td>
+                            <input type="text" id="fname" name="firstname" placeholder="Your first name.." required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="lname">Last Name</label>
+                        </td>
+                        <td>
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">Email</label>
+                        </td>
+                        <td>
+                            <input type="text" id="email" name="email" placeholder="Your email address.." required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="message">Message</label>
+                        </td>
+                        <td>
+                            <textarea id="message" name="message" placeholder="Write your message here.." rows="6" required></textarea>
+                        </td>
+                    </tr>
 
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+                </table>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </center>
 
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="Your email address.." required>
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Write your message here.." rows="6" required></textarea>
-
-            <input type="submit" value="Submit">
-        </form>
+    <div class="footer">
+        <p>&copy; 2024 My E-commerce Website. All rights reserved.</p>
     </div>
 </body>
+
 </html>
